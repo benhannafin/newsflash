@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 API_KEY = os.getenv("NEWS_API_KEY")
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
-
+# Im Finn made this comment
 if not API_KEY:
     raise RuntimeError("NEWS_API_KEY not set")
 
