@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f11719e-e757-413b-8cb9-9bb33d191e09" name="Changes" comment="first docker part 3">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8c365b2e-a4db-4975-83f0-f4b875c03896.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8c365b2e-a4db-4975-83f0-f4b875c03896.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8c365b2e-a4db-4975-83f0-f4b875c03896/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8c365b2e-a4db-4975-83f0-f4b875c03896/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7f11719e-e757-413b-8cb9-9bb33d191e09" name="Changes" comment="first docker part 3" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,7 +108,7 @@
       <workItem from="1771930396592" duration="2208000" />
       <workItem from="1771937438519" duration="1946000" />
       <workItem from="1772010800418" duration="1005000" />
-      <workItem from="1772012297753" duration="2341000" />
+      <workItem from="1772012297753" duration="2642000" />
     </task>
     <task id="LOCAL-00001" summary="first docker part">
       <option name="closed" value="true" />
