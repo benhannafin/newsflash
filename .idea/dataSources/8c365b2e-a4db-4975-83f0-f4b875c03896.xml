@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G
-5||-9223372036854775808|c|G
+      <Grants>5||-9223372036854775808|c|G
 5||16384|c|G
 5||16551|c|G
 5||16384|C|G
@@ -21,7 +13,7 @@
 5||-9223372036854775808|T|G
 5||16384|T|G
 5||16551|T|G</Grants>
-      <IntrospectionStateNumber>1220</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1240</IntrospectionStateNumber>
       <ServerVersion>17.6</ServerVersion>
       <StartupTime>1771933955</StartupTime>
       <TimeZones>true ACDT
@@ -1471,7 +1463,7 @@ false posix/Zulu
 16603||10|U|G
 16603||16482|U|G
 16603||16384|U|O</Grants>
-      <IntrospectionStateNumber>1220</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1240</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -5138,11 +5130,51 @@ log_statement=none</Config>
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>1220</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>1220</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>1220</LastIntrospectionL3Xid>
+      <Grants>17524||16384|r|G
+17524||16480|r|G
+17524||16481|r|G
+17524||16482|r|G
+17524||16384|w|G
+17524||16480|w|G
+17524||16481|w|G
+17524||16482|w|G
+17524||16384|U|G
+17524||16480|U|G
+17524||16481|U|G
+17524||16482|U|G
+17525||16384|d|G
+17525||16480|d|G
+17525||16481|d|G
+17525||16482|d|G
+17525||16384|a|G
+17525||16480|a|G
+17525||16481|a|G
+17525||16482|a|G
+17525||16384|x|G
+17525||16480|x|G
+17525||16481|x|G
+17525||16482|x|G
+17525||16384|r|G
+17525||16480|r|G
+17525||16481|r|G
+17525||16482|r|G
+17525||16384|t|G
+17525||16480|t|G
+17525||16481|t|G
+17525||16482|t|G
+17525||16384|D|G
+17525||16480|D|G
+17525||16481|D|G
+17525||16482|D|G
+17525||16384|w|G
+17525||16480|w|G
+17525||16481|w|G
+17525||16482|w|G</Grants>
+      <LastIntrospectionL1Xid>1240</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>1240</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>1240</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-02-24.13:26:01</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-02-25.10:03:33</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>1128</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -5214,5 +5246,81 @@ log_statement=none</Config>
       <StateNumber>893</StateNumber>
       <CallRoutineId>16560</CallRoutineId>
     </trigger>
+    <sequence id="299" parent="287" name="news_id_seq">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>17524</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>1236</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="300" parent="287" name="news">
+      <DetailsLevel>2</DetailsLevel>
+      <ObjectId>17525</ObjectId>
+      <StateNumber>1236</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="301" parent="300" name="id">
+      <DefaultExpression>nextval(&apos;news_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1236</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <SequenceId>17524</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="302" parent="300" name="title">
+      <Position>2</Position>
+      <StateNumber>1236</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="303" parent="300" name="source">
+      <Position>3</Position>
+      <StateNumber>1236</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="304" parent="300" name="url">
+      <Position>4</Position>
+      <StateNumber>1236</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="305" parent="300" name="news_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17531</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1236</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="306" parent="300" name="news_url_key">
+      <ColNames>url</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17533</ObjectId>
+      <StateNumber>1236</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="307" parent="300" name="news_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17532</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1236</StateNumber>
+      <UnderlyingIndexId>17531</UnderlyingIndexId>
+    </key>
+    <key id="308" parent="300" name="news_url_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17534</ObjectId>
+      <StateNumber>1236</StateNumber>
+      <UnderlyingIndexId>17533</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
