@@ -1,58 +1,71 @@
 import os
 import requests
-from flask import Flask, jsonify
+import psycopg2
+from flask import Flask, jsonify, render_template
+from dotenv import load_dotenv
 
-app = Flask(__name__)
+load_dotenv()
+
+app = Flask(__name__)  # no need to set static_folder
 
 API_KEY = os.getenv("NEWS_API_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
-# Im Finn made this comment
-if not API_KEY:
-    raise RuntimeError("NEWS_API_KEY not set")
+
+def get_conn():
+    return psycopg2.connect(DATABASE_URL)
 
 
 @app.route("/")
 def index():
-    return jsonify({"message": "News API running"}), 200
+    return render_template("index.html")
 
 
-@app.route("/news")
-def news():
-    try:
-        r = requests.get(
-            NEWS_URL,
-            params={
-                "country": "ie",   # Ireland headlines
-                "apiKey": API_KEY
-            },
-            timeout=5
-        )
+@app.route("/sync-news")
+def sync_news():
+    r = requests.get(
+        NEWS_URL,
+        params={"country": "ie", "apiKey": API_KEY},
+        timeout=5
+    )
+    data = r.json()
 
-        data = r.json()
+    articles = [
+        (a["title"], a["source"]["name"], a["url"])
+        for a in data.get("articles", [])
+        if a.get("title") and a.get("url") and a.get("source", {}).get("name")
+    ]
 
-        if r.status_code != 200:
-            return jsonify({
-                "error": "News API error",
-                "api_response": data
-            }), 502
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.executemany(
+                """
+                insert into news (title, source, url)
+                values (%s, %s, %s)
+                on conflict (url) do nothing
+                """,
+                articles
+            )
 
-        articles = [
-            {
-                "title": a["title"],
-                "source": a["source"]["name"],
-                "url": a["url"]
-            }
-            for a in data["articles"]
-        ]
-
-        return jsonify({"articles": articles}), 200
-
-    except requests.RequestException as e:
-        return jsonify({
-            "error": "Failed to contact news service",
-            "details": str(e)
-        }), 503
+    return jsonify({"stored": len(articles)})
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/stored-news")
+def stored_news():
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select title, source, url from news order by id desc limit 50")
+            rows = cur.fetchall()
+
+    return jsonify({"articles": [{"title": t, "source": s, "url": u} for (t, s, u) in rows]})
+
+
+@app.route("/sources")
+def sources():
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select distinct source from news order by source")
+            rows = cur.fetchall()
+
+    return jsonify({"sources": [r[0] for r in rows]})

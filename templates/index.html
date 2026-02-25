@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Supabase News Test</title>
+</head>
+<body>
+
+<h1>Stored News</h1>
+
+<button onclick="syncNews()">Fetch + Store Latest News</button>
+
+<br><br>
+
+<label>Filter by source:</label>
+<select id="sourceSelect" onchange="loadNews()">
+  <option value="">All</option>
+</select>
+
+<ul id="newsList"></ul>
+
+<script>
+async function syncNews() {
+  await fetch("/sync-news");
+  loadSources();
+  loadNews();
+}
+
+async function loadSources() {
+  const res = await fetch("/sources");
+  const data = await res.json();
+
+  const select = document.getElementById("sourceSelect");
+  select.innerHTML = '<option value="">All</option>';
+
+  data.sources.forEach(s => {
+    const opt = document.createElement("option");
+    opt.value = s;
+    opt.textContent = s;
+    select.appendChild(opt);
+  });
+}
+
+async function loadNews() {
+  const res = await fetch("/stored-news");
+  const data = await res.json();
+
+  const list = document.getElementById("newsList");
+  list.innerHTML = "";
+
+  const selected = document.getElementById("sourceSelect").value;
+
+  data.articles
+    .filter(a => !selected || a.source === selected)
+    .forEach(a => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="${a.url}" target="_blank">${a.title}</a> (${a.source})`;
+      list.appendChild(li);
+    });
+}
+
+loadSources();
+loadNews();
+</script>
+
+</body>
+</html>
