@@ -1,8 +1,9 @@
 import os
 import requests
-import psycopg2
 from flask import Flask, jsonify, render_template
 from dotenv import load_dotenv
+
+load_dotenv()
 
 load_dotenv()
 
@@ -13,8 +14,13 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
-def get_conn():
-    return psycopg2.connect(DATABASE_URL)
+# Trusted publishers and their NewsAPI source IDs
+PUBLISHERS = {
+    "BBC News": "bbc-news",
+    "New York Times": "the-new-york-times",
+    "Washington Post": "the-washington-post",
+    "Wall Street Journal": "the-wall-street-journal"
+}
 
 
 @app.route("/")
@@ -22,50 +28,34 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/sync-news")
-def sync_news():
-    r = requests.get(
-        NEWS_URL,
-        params={"country": "ie", "apiKey": API_KEY},
-        timeout=5
-    )
-    data = r.json()
+@app.route("/headlines")
+def get_headlines():
+    results = []
 
-    articles = [
-        (a["title"], a["source"]["name"], a["url"])
-        for a in data.get("articles", [])
-        if a.get("title") and a.get("url") and a.get("source", {}).get("name")
-    ]
+    for name, source_id in PUBLISHERS.items():
+        r = requests.get(
+            NEWS_URL,
+            params={
+                "sources": source_id,
+                "pageSize": 1,
+                "apiKey": API_KEY
+            },
+            timeout=5
+        )
 
-    with get_conn() as conn:
-        with conn.cursor() as cur:
-            cur.executemany(
-                """
-                insert into news (title, source, url)
-                values (%s, %s, %s)
-                on conflict (url) do nothing
-                """,
-                articles
-            )
+        data = r.json()
+        headline = "No headline available"
 
-    return jsonify({"stored": len(articles)})
+        if data.get("articles"):
+            headline = data["articles"][0]["title"]
 
+        results.append({
+            "publisher": name,
+            "headline": headline
+        })
 
-@app.route("/stored-news")
-def stored_news():
-    with get_conn() as conn:
-        with conn.cursor() as cur:
-            cur.execute("select title, source, url from news order by id desc limit 50")
-            rows = cur.fetchall()
-
-    return jsonify({"articles": [{"title": t, "source": s, "url": u} for (t, s, u) in rows]})
+    return jsonify({"headlines": results})
 
 
-@app.route("/sources")
-def sources():
-    with get_conn() as conn:
-        with conn.cursor() as cur:
-            cur.execute("select distinct source from news order by source")
-            rows = cur.fetchall()
-
-    return jsonify({"sources": [r[0] for r in rows]})
+if __name__ == "__main__":
+    app.run(debug=True)

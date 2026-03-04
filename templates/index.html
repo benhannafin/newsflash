@@ -1,66 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Supabase News Test</title>
+    <title>Global News Headlines</title>
+
+    <style>
+        body {
+            font-family: Arial, serif;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+
+        .news-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .publisher {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Stored News</h1>
+    <h1>Top Headlines from Trusted Publishers</h1>
 
-<button onclick="syncNews()">Fetch + Store Latest News</button>
+    <div id="news"></div>
 
-<br><br>
+    <script>
+        async function loadHeadlines() {
+            const res = await fetch("/headlines");
+            const data = await res.json();
 
-<label>Filter by source:</label>
-<select id="sourceSelect" onchange="loadNews()">
-  <option value="">All</option>
-</select>
+            const container = document.getElementById("news");
+            container.innerHTML = "";
 
-<ul id="newsList"></ul>
+            data.headlines.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "news-card";
 
-<script>
-async function syncNews() {
-  await fetch("/sync-news");
-  loadSources();
-  loadNews();
-}
+                div.innerHTML = `
+                    <div class="publisher">${item.publisher}</div>
+                    <div class="headline">${item.headline}</div>
+                `;
 
-async function loadSources() {
-  const res = await fetch("/sources");
-  const data = await res.json();
+                container.appendChild(div);
+            });
+        }
 
-  const select = document.getElementById("sourceSelect");
-  select.innerHTML = '<option value="">All</option>';
-
-  data.sources.forEach(s => {
-    const opt = document.createElement("option");
-    opt.value = s;
-    opt.textContent = s;
-    select.appendChild(opt);
-  });
-}
-
-async function loadNews() {
-  const res = await fetch("/stored-news");
-  const data = await res.json();
-
-  const list = document.getElementById("newsList");
-  list.innerHTML = "";
-
-  const selected = document.getElementById("sourceSelect").value;
-
-  data.articles
-    .filter(a => !selected || a.source === selected)
-    .forEach(a => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="${a.url}" target="_blank">${a.title}</a> (${a.source})`;
-      list.appendChild(li);
-    });
-}
-
-loadSources();
-loadNews();
-</script>
+        loadHeadlines();
+    </script>
 
 </body>
 </html>
