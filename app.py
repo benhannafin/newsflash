@@ -1,57 +1,56 @@
 import os
 import requests
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
 API_KEY = os.getenv("NEWS_API_KEY")
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
-# Im Finn made this comment
-if not API_KEY:
-    raise RuntimeError("NEWS_API_KEY not set")
+
+# Trusted publishers and their NewsAPI source IDs
+PUBLISHERS = {
+    "BBC News": "bbc-news",
+    "New York Times": "the-new-york-times",
+    "Washington Post": "the-washington-post",
+    "Wall Street Journal": "the-wall-street-journal"
+}
 
 
 @app.route("/")
 def index():
-    return jsonify({"message": "News API running"}), 200
+    return render_template("index.html")
 
 
-@app.route("/news")
-def news():
-    try:
+@app.route("/headlines")
+def get_headlines():
+    results = []
+
+    for name, source_id in PUBLISHERS.items():
         r = requests.get(
             NEWS_URL,
             params={
-                "country": "ie",   # Ireland headlines
+                "sources": source_id,
+                "pageSize": 1,
                 "apiKey": API_KEY
             },
             timeout=5
         )
 
         data = r.json()
+        headline = "No headline available"
 
-        if r.status_code != 200:
-            return jsonify({
-                "error": "News API error",
-                "api_response": data
-            }), 502
+        if data.get("articles"):
+            headline = data["articles"][0]["title"]
 
-        articles = [
-            {
-                "title": a["title"],
-                "source": a["source"]["name"],
-                "url": a["url"]
-            }
-            for a in data["articles"]
-        ]
+        results.append({
+            "publisher": name,
+            "headline": headline
+        })
 
-        return jsonify({"articles": articles}), 200
-
-    except requests.RequestException as e:
-        return jsonify({
-            "error": "Failed to contact news service",
-            "details": str(e)
-        }), 503
+    return jsonify({"headlines": results})
 
 
 if __name__ == "__main__":
