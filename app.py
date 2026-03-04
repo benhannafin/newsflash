@@ -5,9 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+load_dotenv()
+
+app = Flask(__name__)  # no need to set static_folder
 
 API_KEY = os.getenv("NEWS_API_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
 # Trusted publishers and their NewsAPI source IDs
