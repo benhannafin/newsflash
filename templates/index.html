@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Top Global Headlines</title>
-
+  <title>NewsFlash</title>
   <style>
-
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
+      max-width: 900px;
       margin: 40px auto;
     }
 
     h1 {
       border-bottom: 2px solid black;
       padding-bottom: 10px;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 14px;
+      margin-right: 10px;
+      cursor: pointer;
     }
 
     .card {
@@ -38,44 +46,64 @@
       text-decoration: underline;
     }
 
+    #status {
+      margin: 15px 0;
+      color: #333;
+    }
   </style>
-
 </head>
-
 <body>
 
 <h1>Top Headlines from Trusted Publishers</h1>
 
+<div class="controls">
+  <button onclick="loadLiveHeadlines()">Load Live Headlines</button>
+  <button onclick="saveHeadlines()">Save Headlines to Supabase</button>
+  <button onclick="loadSavedHeadlines()">Load Saved Headlines</button>
+</div>
+
+<div id="status"></div>
 <div id="news"></div>
 
 <script>
-
-async function loadHeadlines() {
-
+async function loadLiveHeadlines() {
   const res = await fetch("/headlines");
   const data = await res.json();
+  renderHeadlines(data.headlines || []);
+  document.getElementById("status").textContent = "Showing live headlines from NewsAPI";
+}
 
+async function saveHeadlines() {
+  const res = await fetch("/save-headlines");
+  const data = await res.json();
+  document.getElementById("status").textContent = data.message || data.error;
+}
+
+async function loadSavedHeadlines() {
+  const res = await fetch("/saved-headlines");
+  const data = await res.json();
+  renderHeadlines(data.headlines || []);
+  document.getElementById("status").textContent = "Showing headlines saved in Supabase";
+}
+
+function renderHeadlines(items) {
   const container = document.getElementById("news");
   container.innerHTML = "";
 
-  data.headlines.forEach(item => {
-
+  items.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
 
     div.innerHTML = `
-        <div class="publisher">${item.publisher}</div>
-        <a href="${item.url}" target="_blank">${item.headline}</a>
+      <div class="publisher">${item.publisher}</div>
+      <a href="${item.url}" target="_blank">${item.headline}</a>
     `;
 
     container.appendChild(div);
-
   });
-
 }
 
-loadHeadlines();
-
+loadLiveHeadlines();
 </script>
 
 </body>
