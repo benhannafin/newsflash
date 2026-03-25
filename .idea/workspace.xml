@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f11719e-e757-413b-8cb9-9bb33d191e09" name="Changes" comment="Added clickable links">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="7f11719e-e757-413b-8cb9-9bb33d191e09" name="Changes" comment="The headlines now get saved to supabase" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +115,7 @@
       <workItem from="1772010800418" duration="1005000" />
       <workItem from="1772012297753" duration="2642000" />
       <workItem from="1773046921434" duration="1903000" />
-      <workItem from="1774430240714" duration="1411000" />
+      <workItem from="1774430240714" duration="1716000" />
     </task>
     <task id="LOCAL-00001" summary="first docker part">
       <option name="closed" value="true" />
@@ -153,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773047996173</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="The headlines now get saved to supabase">
+      <option name="closed" value="true" />
+      <created>1774431950763</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774431950763</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +168,8 @@
     <MESSAGE value="first docker part 2" />
     <MESSAGE value="first docker part 3" />
     <MESSAGE value="Added clickable links" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added clickable links" />
+    <MESSAGE value="The headlines now get saved to supabase" />
+    <option name="LAST_COMMIT_MESSAGE" value="The headlines now get saved to supabase" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NewsFlash$NewsFlash.coverage" NAME="NewsFlash Coverage Results" MODIFIED="1774431878104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
