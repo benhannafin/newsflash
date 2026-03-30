@@ -2,19 +2,19 @@
 
 NewsFlash is a web app that shows the latest headlines from major news publishers and allows users to save them to a database.
 
----
+
 
 ## Live App
 
 [https://news-flash-dh4x.onrender.com/](https://news-flash-dh4x.onrender.com/)
 
----
+
 
 ## Repository
 
 [https://github.com/benhannafin/newsflash](https://github.com/benhannafin/newsflash)
 
----
+
 
 ## Team
 
@@ -23,7 +23,7 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * Cillian Dobbyn
 * Conan Day
 
----
+
 
 ## What the app does
 
@@ -32,7 +32,7 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * Lets you save headlines to a database (Supabase)
 * Lets you view saved headlines later
 
----
+
 
 ## Stack used
 
@@ -43,7 +43,7 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * GitHub Actions (CI)
 * Render (deployment)
 
----
+
 
 ## Endpoints
 
@@ -54,7 +54,7 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * `/health` → check if app is running
 * `/status` → check API + DB connection
 
----
+
 
 ## Running with Docker
 
@@ -70,7 +70,7 @@ Run:
 docker run -p 5000:5000 --env-file .env newsflash
 ```
 
----
+
 
 ## Running locally
 
@@ -83,7 +83,7 @@ Then go to:
 
 [http://localhost:5000](http://localhost:5000)
 
----
+
 
 ## Environment variables
 
@@ -94,7 +94,7 @@ NEWS_API_KEY=your_api_key
 DATABASE_URL=your_database_url
 ```
 
----
+
 
 ## CI
 
@@ -105,7 +105,7 @@ GitHub Actions is used to:
 
 Runs on every push and pull request.
 
----
+
 
 ## Deployment
 
@@ -113,7 +113,7 @@ The app is deployed on Render using Docker.
 
 It automatically updates when changes are pushed to the `main` branch.
 
----
+
 
 ## Testing the app
 
@@ -122,7 +122,7 @@ It automatically updates when changes are pushed to the `main` branch.
 3. Click “Save Headlines”
 4. Click “Load Saved Headlines”
 
----
+
 
 ## Notes
 
