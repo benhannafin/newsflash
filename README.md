@@ -129,3 +129,4 @@ It automatically updates when changes are pushed to the `main` branch.
 * Duplicate headlines are avoided using the URL as a unique field
 * Basic logging and error handling are included
 * The app uses environment variables for configuration
+* The code contributor Bottletop7 is also Ben Hannafin, using the account linked to his personal email
