@@ -1,0 +1,71 @@
+Architecture Document – NewsFlash
+1. Introduction
+
+NewsFlash is a web application that displays current news headlines from major publishers and allows users to save them to a database. It uses NewsAPI to get live data and Supabase (PostgreSQL) to store headlines.
+
+The goal of the project was to build a system that connects an external API, a backend, and a database.
+
+2. System Overview
+
+The system has five main parts:
+
+Frontend (HTML + JavaScript)
+Flask backend
+NewsAPI (external service)
+Supabase database
+Render (hosting)
+
+The frontend sends requests to the Flask backend. Flask handles the logic, gets data from NewsAPI, and stores or retrieves data from the database. Render hosts the application online.
+
+3. Architecture Diagram
+User Browser
+     |
+     v
+Flask App
+     |
+     +-------> NewsAPI
+     |
+     +-------> Supabase Database
+4. Data Flow
+
+There are three main actions in the app:
+
+Load Headlines
+The browser calls /headlines. Flask requests data from NewsAPI and returns it to the frontend.
+
+Save Headlines
+The browser calls /save-headlines. Flask fetches headlines and inserts them into the database. Duplicate articles are prevented using the URL.
+
+Load Saved Headlines
+The browser calls /saved-headlines. Flask reads from the database and returns stored headlines.
+
+5. Database Design
+
+The app uses a table called news with:
+
+id
+publisher
+headline
+url
+created_at
+
+The url field is unique to avoid duplicates.
+
+6. Deployment
+
+The app is containerised using Docker and deployed on Render. The GitHub repository is linked to Render, so pushing to the main branch automatically updates the app.
+
+Environment variables are used for the API key and database connection.
+
+7. Observability
+
+The app includes:
+
+/health to check if it is running
+/status to check API and database connection
+
+Basic logging is also included for debugging.
+
+8. Conclusion
+
+The system connects a frontend, backend, API, and database in a simple way. It shows how data can be fetched, stored, and displayed. The design is simple but works well for the purpose of the project.
