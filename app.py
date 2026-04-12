@@ -183,6 +183,7 @@ def saved_headlines():
             "details": str(e)
         }), 500
 
+
 @app.route("/status")
 def status():
     logging.info("Status check requested")
@@ -190,7 +191,7 @@ def status():
     database_connected = False
 
     try:
-        with get_conn() as conn:
+        with get_conn():
             database_connected = True
     except Exception as e:
         logging.error(f"Database connection error: {e}")
@@ -199,6 +200,7 @@ def status():
         "api_key_loaded": API_KEY is not None,
         "database_connected": database_connected
     })
+
 
 # Run the app (used locally and in Docker)
 if __name__ == "__main__":
