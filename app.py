@@ -22,7 +22,6 @@ NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
 PUBLISHERS = {
     "BBC News": "bbc-news",
-    "New York Times": "the-new-york-times",
     "Washington Post": "the-washington-post",
     "Wall Street Journal": "the-wall-street-journal"
 }
