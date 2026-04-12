@@ -122,7 +122,14 @@ It automatically updates when changes are pushed to the `main` branch.
 3. Click “Save Headlines”
 4. Click “Load Saved Headlines”
 
+## Testing
 
+Basic tests are included using pytest to verify key endpoints.
+
+Run tests locally:
+
+```bash
+pytest
 
 ## Notes
 
