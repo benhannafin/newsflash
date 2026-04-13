@@ -23,6 +23,10 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * Cillian Dobbyn
 * Conan Day
 
+## Team Contribution
+
+Work was divided across implementation, deployment, testing, and documentation. 
+Contribution levels varied across the project, but all components were completed to deliver the project.
 
 
 ## What the app does
