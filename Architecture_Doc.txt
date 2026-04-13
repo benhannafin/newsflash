@@ -1,7 +1,7 @@
-Architecture Document – NewsFlash
 1. Introduction
 
-NewsFlash is a web application that displays current news headlines from major publishers and allows users to save them to a database. It uses NewsAPI to get live data and Supabase (PostgreSQL) to store headlines.
+NewsFlash is a web application that displays current news headlines from major publishers and allows users to save them to a database.
+It uses NewsAPI to get live data and Supabase to store headlines.
 
 The goal of the project was to build a system that connects an external API, a backend, and a database.
 
@@ -17,16 +17,7 @@ Render (hosting)
 
 The frontend sends requests to the Flask backend. Flask handles the logic, gets data from NewsAPI, and stores or retrieves data from the database. Render hosts the application online.
 
-3. Architecture Diagram
-User Browser
-     |
-     v
-Flask App
-     |
-     +-------> NewsAPI
-     |
-     +-------> Supabase Database
-4. Data Flow
+3. Data Flow
 
 There are three main actions in the app:
 
@@ -39,7 +30,7 @@ The browser calls /save-headlines. Flask fetches headlines and inserts them into
 Load Saved Headlines
 The browser calls /saved-headlines. Flask reads from the database and returns stored headlines.
 
-5. Database Design
+4. Database Design
 
 The app uses a table called news with:
 
@@ -51,13 +42,13 @@ created_at
 
 The url field is unique to avoid duplicates.
 
-6. Deployment
+5. Deployment
 
 The app is containerised using Docker and deployed on Render. The GitHub repository is linked to Render, so pushing to the main branch automatically updates the app.
 
 Environment variables are used for the API key and database connection.
 
-7. Observability
+6. Observability
 
 The app includes:
 
@@ -66,6 +57,6 @@ The app includes:
 
 Basic logging is also included for debugging.
 
-8. Conclusion
+7. Conclusion
 
-The system connects a frontend, backend, API, and database in a simple way. It shows how data can be fetched, stored, and displayed. The design is simple but works well for the purpose of the project.
+The system connects a frontend, backend, API, and database. It shows how data can be fetched, stored, and displayed. The design is simple but works well for the purpose of the project.
