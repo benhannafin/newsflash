@@ -54,6 +54,11 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 * `/health` → check if app is running
 * `/status` → check API + DB connection
 
+## CI/CD Overview
+
+The project uses GitHub Actions for CI and Render for automatic deployment.  
+When changes are pushed to the main branch, the application is rebuilt and redeployed.
+
 
 
 ## Running with Docker
@@ -93,6 +98,7 @@ Create a `.env` file:
 NEWS_API_KEY=your_api_key
 DATABASE_URL=your_database_url
 ```
+A `.env.example` file is included to show required variables.
 
 
 
@@ -101,6 +107,8 @@ DATABASE_URL=your_database_url
 GitHub Actions is used to:
 
 * install dependencies
+* run tests (pytest)
+* run linting (flake8)
 * build the Docker image
 
 Runs on every push and pull request.
@@ -122,11 +130,17 @@ It automatically updates when changes are pushed to the `main` branch.
 3. Click “Save Headlines”
 4. Click “Load Saved Headlines”
 
+## Testing
 
+Basic tests are included using pytest to verify key endpoints.
+
+Run tests locally:
+
+bash
+pytest
 
 ## Notes
 
 * Duplicate headlines are avoided using the URL as a unique field
 * Basic logging and error handling are included
 * The app uses environment variables for configuration
-* The code contributor Bottletop7 is also Ben Hannafin, using the account linked to his personal email
