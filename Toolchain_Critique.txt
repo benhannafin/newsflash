@@ -1,36 +1,17 @@
-Toolchain Critique - NewsFlash
-1. Introduction
-This project used a range of tools to build and deploy a simple web application.
-The main tools used were Flask, NewsAPI, Supabase, Docker, GitHub Actions, and Render.
-These tools were chosen to support integration, deployment, and a basic DevOps workflow.
+The project uses a modern DevOps toolchain with Flask for the backend,
+Supabase for the database, Docker for containerisation,
+GitHub for version control, GitHub Actions for CI, and Render for deployment.
 
-2. Flask
-Flask was used as the backend. It was chosen because it is simple and easy to set up.
-It allowed us to quickly create API routes and connect the frontend to both the external API and the database.
-A benefit of Flask is its simplicity, but it does not have as many built-in features as larger frameworks like Django.
+Overall, the toolchain worked well and allowed us to build, test and deploy the application efficiently.
+Docker made it easy to run the app consistently across different environments, and Render provided a simple way to deploy the application online.
 
-3. NewsAPI
-NewsAPI was used to fetch live headlines. It was easy to use and provided data in a clear JSON format.
-The main advantage is that it gives real-time data. However, it depends on an API key and external availability, so the app may fail if the service is down.
+GitHub Actions was used to automate the build process.
+It installs dependencies, runs linting using flake8, runs basic tests using pytest, and builds the Docker image.
+This helped ensure the code was working correctly before deployment.
 
-4. Supabase
-Supabase was used as the database. It provides a hosted PostgreSQL database, which made it quick to set up.
-It worked well for storing and retrieving headlines.
-A downside is that it relies on an external service, so if it is unavailable the app cannot access stored data.
+One limitation is that the tests are quite basic and do not cover all edge cases or database interactions.
+In a larger project, more comprehensive testing would be useful.
 
-5. Docker
-Docker was used to containerise the app. This made sure the app runs the same everywhere and made deployment easier.
-It is useful for consistency, but it can be slightly difficult to understand at first.
+Another limitation is that while version control was used effectively, there was limited use of advanced collaboration features such as detailed pull request reviews or issue tracking.
 
-6. GitHub Actions
-GitHub Actions was used for CI. It builds the Docker image when changes are pushed.
-This helps catch problems early, but the pipeline is quite basic as it does not include tests or linting.
-
-7. Render
-Render was used to deploy the app. It connects to GitHub and automatically updates the app when changes are pushed.
-This made deployment simple, but the free tier can be slow at times.
-
-8. Overall Evaluation
-Overall, the toolchain worked well and supported a simple DevOps approach. The tools made it easy to build, deploy, and update the application.
-If the project was extended, improvements could include adding tests to the CI pipeline and reducing reliance on external services.
-
+Overall, the toolchain was appropriate for the size of this project and supported development, testing and deployment.
