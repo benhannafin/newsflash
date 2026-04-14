@@ -1,0 +1,16 @@
+Team Members
+Ben Hannafin, Finn Lennon, Cillian Dobbyn, Conan Day
+
+Overview
+The project was completed as a group, with work split across development, deployment, testing, and documentation.
+Communication took place through GitHub and in person discussions when planning features and resolving issues.
+
+Work Distribution
+Tasks were divided into key areas such as backend development (Flask app and API integration), database setup (Supabase), deployment (Docker and Render), and documentation. Different team members contributed in different areas, with some focusing more on implementation and others on setup and documentation.
+
+Use of GitHub
+GitHub was used to manage the project, including version control, branching, and merging changes into the main branch.
+This helped keep the project organised and ensured everyone had access to the latest version.
+
+Reflection
+Overall, the project demonstrated the importance of teamwork, version control, and using DevOps tools to build and deploy a working application.
