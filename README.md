@@ -18,10 +18,10 @@ NewsFlash is a web app that shows the latest headlines from major news publisher
 
 ## Team
 
-* Ben Hannafin
-* Finn Lennon
-* Cillian Dobbyn
-* Conan Day
+* Ben Hannafin (124375573)
+* Finn Lennon (124408656)
+* Cillian Dobbyn (124376021)
+* Conan Day (124341683)
 
 ## Team Contribution
 
